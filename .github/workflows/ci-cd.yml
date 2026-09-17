@@ -2,11 +2,18 @@ name: CI/CD Pipeline
 
 on:
   push:
+<<<<<<< HEAD
     branches: [ main ]
+=======
+    branches: [main]
+  pull_request:
+    branches: [main]
+>>>>>>> d4e0f4b2b3f831ecb39b919f70e4b0d7c02a4e97
 
 jobs:
   build:
     runs-on: ubuntu-latest
+<<<<<<< HEAD
 
     defaults:
       run:
@@ -14,19 +21,41 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+=======
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+>>>>>>> d4e0f4b2b3f831ecb39b919f70e4b0d7c02a4e97
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
+<<<<<<< HEAD
           node-version: '22'
+=======
+          node-version: '18'
+>>>>>>> d4e0f4b2b3f831ecb39b919f70e4b0d7c02a4e97
 
       - name: Install Dependencies
         run: npm install
 
+<<<<<<< HEAD
+=======
+      - name: Run Tests
+        run: npm test -- --watchAll=false --coverage
+
+>>>>>>> d4e0f4b2b3f831ecb39b919f70e4b0d7c02a4e97
       - name: Build Application
         run: npm run build
 
       - name: Deploy to GitHub Pages
+<<<<<<< HEAD
         run: npm run deploy
+=======
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@://github.com"
+          npm run deploy
+>>>>>>> d4e0f4b2b3f831ecb39b919f70e4b0d7c02a4e97
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
