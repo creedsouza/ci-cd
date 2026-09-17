@@ -1,0 +1,28 @@
+name: Novo Pipeline de Producao
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: meu-app-react # <-- Garante que o GitHub entra na pasta certa do projeto
+
+    steps:
+      - name: Baixar o codigo do repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar o Node.js v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instalar as Dependencias
+        run: npm install
+
+      - name: Gerar o Build de Producao
+        run: npm run build
